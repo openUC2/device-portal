@@ -101,6 +101,9 @@ function bundleGenerator(type, appName, context) {
 }
 
 export default [
+	themeGenerator('eager', undefined),
 	themeGenerator('light'),
+	themeGenerator('dark'),
+	bundleGenerator('eager', 'appEager'),
 	bundleGenerator('deferred', 'app', 'window'),
 ];

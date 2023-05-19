@@ -15,7 +15,7 @@
 @import 'node_modules/bulma/sass/utilities/initial-variables.sass';
 
 // Theme colors
-@import 'node_modules/@sargassum-world/styles/colors-light.vars.scss';
+@import 'node_modules/@sargassum-world/styles/colors-dark.vars.scss';
 
 // Shared
 @import 'node_modules/@sargassum-world/styles/theme.vars.scss';
@@ -29,3 +29,8 @@
 // Overrides & components
 @import 'node_modules/@sargassum-world/styles/theme-overrides.scss';
 @import 'node_modules/@sargassum-world/styles/components.scss';
+
+// Overrides only for dark mode
+.icon img {
+  filter: invert(1);
+}
