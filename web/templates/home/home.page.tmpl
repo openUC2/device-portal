@@ -6,11 +6,104 @@
 {{define "content"}}
   <main class="main-container">
     <section class="section content">
-      <h1>PlanktoScope</h1>
-      <div class="card-width">
+      <div class="container">
+        <h1>PlanktoScope</h1>
         <p>
-          Welcome! This is the home page for your PlanktoScope. More content will be added soon.
+          Welcome! This is the home page for your PlanktoScope.
         </p>
+
+        <h2>Browser applications</h2>
+        <p>PlanktoScope operation:</p>
+        <ul>
+          <li>
+            <strong><a href="/ps/node-red-v2/">Node-RED dashboard</a></strong>:
+            Provides a Node-RED dashboard to operate the PlanktoScope
+          </li>
+          <li>
+            <strong><a href="/ps/data/browse/">Dataset file manager</a></strong>:
+            Provides a file browsing and management interface for the datasets collected by the PlanktoScope
+          </li>
+        </ul>
+        <p>System administration:</p>
+        <ul>
+          <li>
+            <strong><a href="/admin/cockpit/">Cockpit</a></strong>:
+            Provides a general-purpose system administration dashboard for the computer embedded in the PlanktoScope
+          </li>
+          <li>
+            <strong><a href="/ps/data/browse/">System file manager</a></strong>:
+            Provides a file browsing and management interface for the entire filesystem of the computer embedded in the PlanktoScope
+          </li>
+          <li>
+            <strong><a href="/admin/portainer/">Portainer</a></strong>:
+            Provides a Docker administration dashboard
+          </li>
+        </ul>
+        <p>Software development:</p>
+        <ul>
+          <li>
+            <strong><a href="/admin/ps/node-red-v2/">Node-RED dashboard editor</a></strong>:
+            Provides a Node-RED flow editor to modify the Node-RED dashboard
+          </li>
+        </ul>
+        <p>System recovery:</p>
+        <ul>
+          <li>
+            <strong>Cockpit (direct-access fallback)</strong>:
+            Provides a fallback general-purpose system administration dashboard, accessible at :9090/admin/cockpit/ even if the system's service proxy stops working
+          </li>
+          <li>
+            <strong>Portainer (direct-access fallback)</strong>:
+            Provides a fallback Docker administration dashboard, accessible at :9000/admin/portainer/ even if the system's service proxy stops working
+          </li>
+        </ul>
+
+        <h2>Network APIs</h2>
+        <p>PlanktoScope operation:</p>
+        <ul>
+          <li>
+            <strong>PlanktoScope hardware controller</strong>:
+            Provides an MQTT service on /actuator, /imager, /status/pump, /status/focus, and /status/segmenter for operating the PlanktoScope hardware
+          </li>
+          <li>
+            <strong><a href="/ps/hal/camera/streams/preview.mjpg">PlanktoScope microscope camera preview</a></strong>:
+            Provides an MJPEG stream to preview the latest microscope camera frame
+          </li>
+          <li>
+            <strong>PlanktoScope object segmenter</strong>:
+            Provides an MQTT service on /segmenter and /status/segmenter for operating the PlanktoScope object segmenter
+          </li>
+          <li>
+            <strong><a href="/ps/processing/segmenter/streams/object.mjpg">PlanktoScope segmented object preview</a></strong>:
+            Provides an MJPEG stream to preview the latest segmented object
+          </li>
+        </ul>
+
+        <h2>System infrastructure</h2>
+        <p>Networking:</p>
+        <ul>
+          <li>
+            <strong>SSH server</strong>:
+            Provides SSH access to the PlanktoScope on port 22
+          </li>
+          <li>
+            <strong>MQTT broker</strong>:
+            Provides a broker for MQTT messages on port 1883
+          </li>
+          <li>
+            <strong>Portainer Edge Agent tunnel</strong>:
+            Provides a TLS tunnel server on port 8008 which Portainer Edge Agents can connect to
+          </li>
+          <li>
+            <strong>Service proxy</strong>:
+            Provides a reverse-proxy to make browser applications and HTTP network APIs uniformly available at different paths on port 80
+          </li>
+          <li>
+            <strong>Device portal</strong>:
+            Provides a landing page as a portal to the browser applications, network APIs, and system infrastructure on the PlanktoScope
+          </li>
+        </ul>
+      </div>
     </section>
   </main>
 {{end}}
