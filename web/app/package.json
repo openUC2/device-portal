@@ -1,0 +1,32 @@
+{
+  "name": "device-portal",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "rollup -c",
+    "format": "prettier --write ./src/**/*.{js,html} --no-error-on-unmatched-pattern",
+    "lint": "prettier --check --write ./src/**/*.{js,html} --no-error-on-unmatched-pattern && eslint src/**/*.{js} --no-error-on-unmatched-pattern",
+    "lint:fix": "prettier --write ./src/**/*.{js,html} --no-error-on-unmatched-pattern && eslint --fix src/**/*.{js} --no-error-on-unmatched-pattern"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@sargassum-world/styles": "^0.2.2",
+    "bulma": "^0.9.4",
+    "eslint": "^8.40.0",
+    "eslint-plugin-import": "^2.27.5",
+    "prettier": "^2.8.8",
+    "purify-css": "^1.2.5",
+    "rollup": "^3.22.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-css-only": "^4.3.0",
+    "rollup-plugin-scss": "^4.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "sass": "^1.62.1"
+  },
+  "dependencies": {
+    "@fontsource/atkinson-hyperlegible": "^4.5.11",
+    "@fontsource/oxygen-mono": "^4.5.10"
+  }
+}

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="{{block "description" .}}{{end}}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#8e7dc4">
+
+  <title>{{block "title" .}}{{end}} | Sargassum Live</title>
+
+  <link rel="stylesheet" href="{{appHashed "theme-light.min.css"}}">
+  <script>{{.Inlines.JS.BundleEager}}</script>
+  <!-- crossorigin is needed to preload fonts correctly -->
+  <link
+    rel="preload"
+    as="font"
+    type="font/woff2"
+    href="/fonts/atkinson-hyperlegible-latin-400-normal.woff2"
+    crossorigin
+  >
+  <link
+    rel="preload"
+    as="font"
+    type="font/woff2"
+    href="/fonts/atkinson-hyperlegible-latin-700-normal.woff2"
+    crossorigin
+  >
+  <link rel="preload" as="script" href="{{appHashed "bundle-deferred.js"}}">
+  <link rel="icon" href="{{staticHashed "icon.svg"}}" type="image/svg+xml">
+  <link rel="icon alternate" href="/favicon.ico" size="any">
+  <link rel="apple-touch-icon" href="{{staticHashed "apple-touch-icon.png"}}">
+  <!-- TODO: add shortcuts to the web application manifest -->
+  <link rel="manifest" href="/app/app.webmanifest">
+  <script defer src="{{appHashed "bundle-deferred.js"}}" data-turbo-track="reload"></script>
+</head>
+
+<body>
+  <div class="main-window is-flex is-flex-direction-column-touch is-flex-direction-row-desktop">
+    {{block "content" .}}{{end}}
+  </div>
+</body>
+</html>
