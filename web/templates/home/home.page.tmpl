@@ -1,18 +1,35 @@
 {{template "shared/base.layout.tmpl" .}}
 
-{{define "title"}}Home{{end}}
+{{define "title" -}}
+  {{- $machineName := .Data.MachineName -}}
+  PlanktoScope {{$machineName}}
+{{- end}}
 {{define "description"}}PlanktoScope browser portal{{end}}
 
 {{define "content"}}
   {{$hostname := .Data.Hostname}}
   {{$port := .Data.Port}}
+  {{$machineName := .Data.MachineName}}
 
   <main class="main-container">
     <section class="section content">
       <div class="container">
-        <h1>PlanktoScope</h1>
+        <h1>PlanktoScope {{$machineName}}</h1>
         <p>
-          Welcome! This is the home page for your PlanktoScope. Below you can find a list of links to browser applications provided by your PlanktoScope, documentation for using your PlanktoScope, and other relevant information.
+          Welcome! This is the home page for your PlanktoScope with machine name
+          <code>{{$machineName}}</code>. If you're looking for a different PlanktoScope, you should
+          try to open it at its machine-specific URL.
+          {{if hasSuffix ".planktoscope" $hostname}}
+             For example, the machine-specific URL for this planktoscope is
+            <code>{{$machineName}}.planktoscope</code>.
+          {{else if and (hasPrefix "planktoscope" $hostname) (hasSuffix ".local" $hostname)}}
+             For example, the machine-specific URL for this planktoscope is
+            <code>planktoscope-{{$machineName}}.local</code>.
+          {{end}}
+        </p>
+        <p>
+          Below you can find a list of links to browser applications provided by your PlanktoScope,
+          documentation for operating your PlanktoScope, and other information to help you use your PlanktoScope.
         </p>
 
         <h2>Browser applications</h2>
@@ -27,15 +44,17 @@
             Provides a file browsing and management interface for the datasets collected by the PlanktoScope
           </li>
         </ul>
-        <p>System administration:</p>
+        <p>System administration and troubleshooting:</p>
         <ul>
           <li>
             <strong><a href="/admin/cockpit/">Cockpit</a></strong>:
-            Provides a general-purpose system administration dashboard for the computer embedded in the PlanktoScope
+            Provides a general-purpose system administration dashboard for the computer embedded in
+            the PlanktoScope
           </li>
           <li>
             <strong><a href="/ps/data/browse/">System file manager</a></strong>:
-            Provides a file browsing and management interface for the entire filesystem of the computer embedded in the PlanktoScope
+            Provides a file browsing and management interface for the entire filesystem of the
+            computer embedded in the PlanktoScope
           </li>
           <li>
             <strong><a href="/admin/portainer/">Portainer</a></strong>:
@@ -53,15 +72,19 @@
         <ul>
           <li>
             <strong><a href="//{{$hostname}}:9090/admin/cockpit/">Cockpit (direct-access fallback)</a></strong>:
-            Provides a fallback general-purpose system administration dashboard, accessible even if the system's service proxy stops working
+            Provides fallback access to the Cockpit application, accessible even if the system's
+            service proxy stops working
           </li>
           <li>
             <strong><a href="//{{$hostname}}:9000/admin/portainer/">Portainer (direct-access fallback)</a></strong>:
-            Provides a fallback Docker administration dashboard, accessible even if the system's service proxy stops working
+            Provides fallback access to the Portainer application, accessible even if the system's
+            service proxy stops working
           </li>
         </ul>
 
-        <h2>Documentation</h2>
+        <h2>Need help?</h2>
+
+        <h3 class="is-size-5">Documentation</h3>
         <p>Accessible offline:</p>
         <ul>
           <li>
@@ -76,74 +99,103 @@
             Provides the latest version of the official PlanktoScope documentation
           </li>
           <li>
-            <strong><a href="https://www.protocols.io/view/planktoscope-protocol-for-plankton-imaging-bp2l6bq3zgqe/v2">Protocol for plankton imaging, v2</a></strong>:
-            Provides version 2 of the protocol for quantifying plankton diversity using version 2.5 of the official PlanktoScope hardware and version 2.3 of the official PlanktoScope software
+            <strong><a href="https://www.protocols.io/view/planktoscope-protocol-for-plankton-imaging-bp2l6bq3zgqe/v2">
+              Protocol for plankton imaging, v2
+            </a></strong>:
+            Provides version 2 of the protocol for quantifying plankton diversity using version 2.5
+            of the official PlanktoScope hardware and version 2.3 of the official PlanktoScope software
           </li>
           <li>
-            <strong><a href="https://www.protocols.io/view/planktoscope-protocol-for-plankton-imaging-bp2l6bq3zgqe/v1?version_warning=no">Protocol for plankton imaging, v1</a></strong>:
-            Provides version 1 of the protocol for quantifying plankton diversity using versions 2.1-2.3 of the official PlanktoScope hardware and version 2.3 of the official PlanktoScope software
+            <strong><a href="https://www.protocols.io/view/planktoscope-protocol-for-plankton-imaging-bp2l6bq3zgqe/v1?version_warning=no">
+              Protocol for plankton imaging, v1
+            </a></strong>:
+            Provides version 1 of the protocol for quantifying plankton diversity using versions 2.1-2.3
+            of the official PlanktoScope hardware and version 2.3 of the official PlanktoScope software
           </li>
         </ul>
 
-        <h2>Community</h2>
+        <h3 class="is-size-5">Community</h3>
         <ul>
           <li>
-            <strong><a href="https://planktoscope.org">Official PlanktoScope website</a></strong>:
-            Provides information about the PlanktoScope project and about how to get involved in the PlanktoScope community
+            <strong><a href="https://www.planktoscope.org">Official PlanktoScope website</a></strong>:
+            Provides information about the PlanktoScope project and about how to get involved in the
+            PlanktoScope community
           </li>
           <li>
-            <strong><a href="https://planktoscope.org">PlanktoScope on GitHub</a></strong>:
+            <strong><a href="https://planktoscope.slack.com">PlanktoScope on Slack</a></strong>:
+            Hosts the community for people building, using, and improving PlanktoScopes
+          </li>
+          <li>
+            <strong><a href="https://www.planktoscope.org/join">
+              PlanktoScope Slack registration form
+            </a></strong>:
+            Provides a registration form to join the PlanktoScope community on Slack
+          </li>
+          <li>
+            <strong><a href="https://github.com/PlanktoScope">PlanktoScope on GitHub</a></strong>:
             Hosts the community for developing and maintaining the PlanktoScope's software and hardware
           </li>
           <li>
             <strong><a href="https://www.fairscope.co/">FairScope</a></strong>:
-            Provides preassembled PlanktoScopes, PlanktoScope hardware kits, and paid support services for operating PlanktoScopes
+            Provides preassembled PlanktoScopes, PlanktoScope hardware kits, and paid support services
+            for operating PlanktoScopes - from the inventor of PlanktoScopes
           </li>
         </ul>
 
-        <h2>Network APIs</h2>
+        <h2>For advanced users</h2>
+
+        <h3 class="is-size-5">Network APIs</h3>
         <p>PlanktoScope operation:</p>
         <ul>
           <li>
             <strong>PlanktoScope hardware controller</strong>:
-            Provides an MQTT service on /actuator, /imager, /status/pump, /status/focus, and /status/segmenter for operating the PlanktoScope hardware
+            Provides an MQTT service on topics under <code>/actuator</code>, <code>/imager</code>,
+            <code>/status/pump</code>, <code>/status/focus</code>, and <code>/status/imager</code>
+            for operating the PlanktoScope hardware
           </li>
           <li>
-            <strong><a href="/ps/hal/camera/streams/preview.mjpg">PlanktoScope microscope camera preview</a></strong>:
+            <strong><a href="/ps/hal/camera/streams/preview.mjpg">
+              PlanktoScope microscope camera preview
+            </a></strong>:
             Provides an MJPEG stream to preview the latest microscope camera frame
           </li>
           <li>
             <strong>PlanktoScope object segmenter</strong>:
-            Provides an MQTT service on /segmenter and /status/segmenter for operating the PlanktoScope object segmenter
+            Provides an MQTT service on topics under <code>/segmenter</code> and
+            <code>/status/segmenter</code> for operating the PlanktoScope object segmenter
           </li>
           <li>
-            <strong><a href="/ps/processing/segmenter/streams/object.mjpg">PlanktoScope segmented object preview</a></strong>:
+            <strong><a href="/ps/processing/segmenter/streams/object.mjpg">
+              PlanktoScope segmented object preview
+            </a></strong>:
             Provides an MJPEG stream to preview the latest segmented object
           </li>
         </ul>
 
-        <h2>System infrastructure</h2>
+        <h3 class="is-size-5">System infrastructure</h3>
         <p>Networking:</p>
         <ul>
           <li>
             <strong>SSH server</strong>:
-            Provides SSH access to the PlanktoScope on port 22
+            Provides SSH access to the PlanktoScope at <code>{{$hostname}}:22</code>
           </li>
           <li>
             <strong>MQTT broker</strong>:
-            Provides a broker for MQTT messages on port 1883
+            Provides a broker for MQTT messages at <code>{{$hostname}}:1883</code>
           </li>
           <li>
             <strong>Portainer Edge Agent tunnel</strong>:
-            Provides a TLS tunnel server on port 8008 which Portainer Edge Agents can connect to
+            Provides a TLS tunnel server at <code>{{$hostname}}:8008</code> which Portainer Edge Agents can connect to
           </li>
           <li>
             <strong>Service proxy</strong>:
-            Provides a reverse-proxy to make browser applications and HTTP network APIs uniformly available at different paths on port 80
+            Provides a reverse-proxy to make browser applications and HTTP network APIs uniformly available
+            at different paths at <code>{{$hostname}}</code>
           </li>
           <li>
             <strong><a href="/">Device portal</a></strong>:
-            Provides a landing page as a portal to the browser applications, network APIs, and system infrastructure on the PlanktoScope
+            Provides a landing page as a portal to the browser applications, network APIs, and system
+            infrastructure on the PlanktoScope
           </li>
         </ul>
       </div>

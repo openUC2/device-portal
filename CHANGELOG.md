@@ -10,4 +10,4 @@ All dates in this file are given in the [UTC time zone](https://en.wikipedia.org
 
 ### Added
 
-- A minimalist static web page with a list of links to other network services assumed to be running on the PlanktoScope.
+- A minimalist static web page with a list of useful links.

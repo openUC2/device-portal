@@ -18,24 +18,36 @@ tar -xzf device-portal_{version number}_{os}_{cpu architecture}.tar.gz device-po
 
 Then you may need to move the device-portal binary into a directory in your system path, or you can just run the device-portal binary in your current directory (in which case you should replace `device-portal` with `./device-portal` in the commands listed below).
 
-Once you have device-portal, you should run it as follows:
+Once you have device-portal, you should run it as follows on a Raspberry Pi:
 ```
 device-portal
 ```
 
-Then you can view the landing page at http://localhost:3000 .
+Then you can view the landing page at http://localhost:3000 . Note that if you are running it on a computer other than the Raspberry Pi with the standard PlanktoScope software distribution, then you will need to set some environment variables (see below) to non-default values.
 
 ### Development
 
 To install various backend development tools, run `make install`. You will need to have installed Go first.
 
-Before you start the server for the first time, you'll need to generate the webapp build artifacts by running `make buildweb` (which requires you to have first installed [Node.js v16](https://nodejs.org/en/) (lts/gallium) and [Yarn Classic](https://classic.yarnpkg.com/lang/en/)). Then you can start the server by running `make run`. You will need to have installed golang first. Any time you modify the webapp files (in the web/app directory), you'll need to run `make buildweb` again to rebuild the bundled CSS and JS. Whenever you use a CSS selector in a template file (in the web/templates directory), you should *also* run `make buildweb`, because the build process for the bundled CSS omits any selectors not used by the templates.
+Before you start the server for the first time, you'll need to generate the webapp build artifacts by running `make buildweb` (which requires you to have first installed [Node.js v16](https://nodejs.org/en/) (lts/gallium) and [Yarn Classic](https://classic.yarnpkg.com/lang/en/)). Then you can start the server by running `make run` with the appropriate environment variables (see below). You will need to have installed golang first. Any time you modify the webapp files (in the web/app directory), you'll need to run `make buildweb` again to rebuild the bundled CSS and JS. Whenever you use a CSS selector in a template file (in the web/templates directory), you should *also* run `make buildweb`, because the build process for the bundled CSS omits any selectors not used by the templates.
 
 ### Building
 
 Because the build pipeline builds Docker images, you will need to either have Docker Desktop or (on Ubuntu) to have installed QEMU (either with qemu-user-static from apt or by running [tonistiigi/binfmt](https://hub.docker.com/r/tonistiigi/binfmt)). You will need a version of Docker with buildx support.
 
 To execute the full build pipeline, run `make`; to build the docker images, run `make build` (make sure you've already run `make install`). Note that `make build` will also automatically regenerate the webapp build artifacts, which means you also need to have first installed Node.js as described in the "Development" section. The resulting built binaries can be found in directories within the dist directory corresponding to OS and CPU architecture (e.g. `./dist/device-portal_window_amd64/device-portal.exe` or `./dist/device-portal_linux_amd64/device-portal`)
+
+### Environment Variables
+
+If you are running device-portal on a computer which is not a Raspberry Pi with the standard PlanktoScope software distribution, then you'll need to set some environment variables. Specifically, you'll need to set:
+
+- Either `SERIAL_NUMBER`, which should be a 32-bit hex number representing the computer's serial number (which is used for determining the computer's machine name to be displayed on the landing page), or `SERIAL_NUMBER_FILE`, which should be the path to a file containing a hex number, the least-significant 32 bits of which will be interpreted as a 32-bit serial number.
+
+For example, you could run device-portal with the fake serial number `0xdeadc0de` using any of the following commands:
+```
+SERIAL_NUMBER=deadc0de make run
+SERIAL_NUMBER=0xdeadc0de make run
+```
 
 ## Licensing
 

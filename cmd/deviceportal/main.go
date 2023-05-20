@@ -21,7 +21,7 @@ func main() {
 	// Get config
 	config, err := conf.GetConfig()
 	if err != nil {
-		e.Logger.Fatal(err, "couldn't set up application config")
+		e.Logger.Fatal(err)
 	}
 
 	// Prepare server
@@ -31,6 +31,10 @@ func main() {
 	}
 	if err = server.Register(e); err != nil {
 		e.Logger.Fatal(err)
+	}
+
+	if config.MachineName.MachineName == "" {
+		e.Logger.Infof("machine name was determined to be %s", config.MachineName.MachineName)
 	}
 
 	// Run server
