@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/Masterminds/sprig/v3 v3.2.3
+	github.com/PlanktoScope/machine-name v0.1.2
 	github.com/benbjohnson/hashfs v0.2.1
 	github.com/labstack/echo/v4 v4.10.2
 	github.com/labstack/gommon v0.4.0
