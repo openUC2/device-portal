@@ -2,9 +2,10 @@
 package home
 
 import (
-	"context"
+	"strings"
 
 	"github.com/labstack/echo/v4"
+	"github.com/pkg/errors"
 	"github.com/sargassum-world/godest"
 )
 
@@ -22,9 +23,23 @@ func (h *Handlers) Register(er godest.EchoRouter) {
 	er.GET("/", h.HandleHomeGet())
 }
 
-type HomeViewData struct{}
+type HomeViewData struct {
+	Hostname string
+	Port     string
+}
 
-func getHomeViewData(ctx context.Context) (vd HomeViewData, err error) {
+func getHomeViewData(host string) (vd HomeViewData, err error) {
+	split := strings.Split(host, ":")
+	const expectedComponents = 2
+	if len(split) > expectedComponents {
+		return HomeViewData{}, errors.Errorf(
+			"unable to split host '%s' into a hostname and a port", host,
+		)
+	}
+	vd.Hostname = split[0]
+	if len(split) == expectedComponents {
+		vd.Port = split[expectedComponents-1]
+	}
 	return vd, nil
 }
 
@@ -33,8 +48,7 @@ func (h *Handlers) HandleHomeGet() echo.HandlerFunc {
 	h.r.MustHave(t)
 	return func(c echo.Context) error {
 		// Run queries
-		ctx := c.Request().Context()
-		homeViewData, err := getHomeViewData(ctx)
+		homeViewData, err := getHomeViewData(c.Request().Host)
 		if err != nil {
 			return err
 		}
