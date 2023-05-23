@@ -33,10 +33,6 @@ func main() {
 		e.Logger.Fatal(err)
 	}
 
-	if config.MachineName.MachineName == "" {
-		e.Logger.Infof("machine name was determined to be %s", config.MachineName.MachineName)
-	}
-
 	// Run server
 	ctxRun, cancelRun := signal.NotifyContext(
 		context.Background(), os.Interrupt, syscall.SIGTERM, syscall.SIGQUIT,

@@ -2,22 +2,24 @@
 package conf
 
 import (
+	"github.com/dgraph-io/ristretto"
 	"github.com/pkg/errors"
 )
 
 type Config struct {
-	HTTP        HTTPConfig
-	MachineName MachineNameConfig
+	Cache ristretto.Config
+	HTTP  HTTPConfig
 }
 
 func GetConfig() (c Config, err error) {
+	c.Cache, err = getCacheConfig()
+	if err != nil {
+		return Config{}, errors.Wrap(err, "couldn't make cache config")
+	}
+
 	c.HTTP, err = getHTTPConfig()
 	if err != nil {
 		return Config{}, errors.Wrap(err, "couldn't make http config")
-	}
-	c.MachineName, err = getMachineNameConfig()
-	if err != nil {
-		return Config{}, errors.Wrap(err, "couldn't make machine name config")
 	}
 	return c, nil
 }
