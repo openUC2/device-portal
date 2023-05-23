@@ -55,15 +55,15 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.41.0.tgz#080321c3b68253522f7646b55b577dd99d2950b3"
   integrity sha512-LxcyMGxwmTh2lY9FwHPGWOHmYFCZvbrFCBZL4FzSSsxsRPuhrYUg/49/0KDfW8tnIEaEHtfmn6+NPN+1DqaNmA==
 
-"@fontsource/atkinson-hyperlegible@^4.5.11":
-  version "4.5.11"
-  resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-4.5.11.tgz#7dc6f9cc92c45fa9eda48f0c5fc9f372e5a31556"
-  integrity sha512-ounnhVVjseNci+G0dGPBwUY7RYM2h8FsfyhzvpUnQYKeiuUcRtGahCswnrKPrvSXNRCl1uqnRSxP3ahJ4miYIQ==
+"@fontsource/atkinson-hyperlegible@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-5.0.1.tgz#c6c0e21076be3da09ccd57fdc74eb4b42d38680a"
+  integrity sha512-5/cYDifnkbzztIx+1O3r27AzxILmMabTaJEyc3Ay4BVGp9XZ0OX4mdn4k/xmP9r8cJefsXE4+5kJL10lXmoI3w==
 
-"@fontsource/oxygen-mono@^4.5.10":
-  version "4.5.10"
-  resolved "https://registry.yarnpkg.com/@fontsource/oxygen-mono/-/oxygen-mono-4.5.10.tgz#498362304a9dbcb04343bd562618e97f781a3e74"
-  integrity sha512-+SLEZx+WVbCRnJ3OpzXvjCm+VfbIkl0kOByUpjvT8bYqRegUxdWzSbXG95e8XPGMdK/tLS7gHcddN/1OV/R4SQ==
+"@fontsource/oxygen-mono@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/oxygen-mono/-/oxygen-mono-5.0.1.tgz#93ed4876d5626ef12b7046826007959e3745789d"
+  integrity sha512-SiJZ3UtgGbn24yfA/7iCR4ERnHeFMQxtExyDcHdgBnQ6AR5qeJje4iIeeueAALpXHmZBC8z7MbH8jHQkrwjMWA==
 
 "@humanwhocodes/config-array@^0.11.8":
   version "0.11.8"
@@ -1931,10 +1931,10 @@ rollup-pluginutils@^2.3.3:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^3.22.0:
-  version "3.22.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.22.0.tgz#e6671baebdd473154ac7998bbc57faabcd7bba20"
-  integrity sha512-imsigcWor5Y/dC0rz2q0bBt9PabcL3TORry2hAa6O6BuMvY71bqHyfReAz5qyAqiQATD1m70qdntqBfBQjVWpQ==
+rollup@^3.23.0:
+  version "3.23.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.23.0.tgz#b8d6146dac4bf058ee817f92820988e9b358b564"
+  integrity sha512-h31UlwEi7FHihLe1zbk+3Q7z1k/84rb9BSwmBSr/XjOCEaBJ2YyedQDuM0t/kfOS0IxM+vk1/zI9XxYj9V+NJQ==
   optionalDependencies:
     fsevents "~2.3.2"
 
