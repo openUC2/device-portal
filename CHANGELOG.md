@@ -19,6 +19,7 @@ All dates in this file are given in the [UTC time zone](https://en.wikipedia.org
 ### Changed
 
 - The machine name is now lazily loaded upon the first time the landing page is loaded and, unless an error occurs (e.g. from trying to determine the machine's serial number), cached for future use.
+- (Breaking change) The optional `SERIAL_NUMBER` environment variable has been renamed to `MACHINENAME_SN`, and the optional `SERIAL_NUMBER_FILE` environment variable has been renamed to `MACHINENAME_SNFILE`.
 
 ## 0.1.0 - 2023-05-20
 

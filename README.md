@@ -41,12 +41,12 @@ To execute the full build pipeline, run `make`; to build the docker images, run 
 
 If you are running device-portal on a computer which is not a Raspberry Pi with the standard PlanktoScope software distribution, then you'll need to set some environment variables. Specifically, you'll need to set:
 
-- Either `SERIAL_NUMBER`, which should be a 32-bit hex number representing the computer's serial number (which is used for determining the computer's machine name to be displayed on the landing page), or `SERIAL_NUMBER_FILE`, which should be the path to a file containing a hex number, the least-significant 32 bits of which will be interpreted as a 32-bit serial number.
+- Either `MACHINENAME_SN`, which should be a 32-bit hex number representing the computer's serial number (which is used for determining the computer's machine name to be displayed on the landing page), or `MACHINENAME_SNFILE`, which should be the path to a file containing a hex number, the least-significant 32 bits of which will be interpreted as a 32-bit serial number.
 
 For example, you could run device-portal with the fake serial number `0xdeadc0de` using any of the following commands:
 ```
-SERIAL_NUMBER=deadc0de make run
-SERIAL_NUMBER=0xdeadc0de make run
+MACHINENAME_SN=deadc0de make run
+MACHINENAME_SN=0xdeadc0de make run
 ```
 
 ## Licensing
