@@ -8,6 +8,12 @@ All dates in this file are given in the [UTC time zone](https://en.wikipedia.org
 
 ## Unreleased
 
+## 0.1.4 - 2023-05-24
+
+### Fixed
+
+- Fixed a few incorrect URLs to other services from the landing page.
+
 ## 0.1.3 - 2023-05-24
 
 ### Fixed
