@@ -80,6 +80,10 @@ func (c *Client) getSerialNumber() (sn uint32, err error) {
 			return 0, errors.Wrapf(err, "couldn't read serial number from file '%s'", c.Config.SNFile)
 		}
 		rawSN = strings.TrimSpace(strings.TrimRight(string(rawFile), "\x00"))
+		const length = 8 // 8 hex chars = 32 bits
+		if len(rawSN) > length {
+			rawSN = rawSN[len(rawSN)-length:]
+		}
 	}
 
 	return parseSerialNumber(rawSN)

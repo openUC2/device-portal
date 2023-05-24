@@ -8,6 +8,12 @@ All dates in this file are given in the [UTC time zone](https://en.wikipedia.org
 
 ## Unreleased
 
+## 0.1.3 - 2023-05-24
+
+### Fixed
+
+- When trying to determine the machine's serial number from a file (e.g. from the Raspberry Pi's firmware device tree), only the 32 least-significant bits (i.e. the 8 rightmost hex characters) are used. This is needed because the Raspberry Pi 4's serial number is prefixed with `10000000`.
+
 ## 0.1.2 - 2023-05-23
 
 ### Fixed
