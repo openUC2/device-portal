@@ -8,6 +8,12 @@ All dates in this file are given in the [UTC time zone](https://en.wikipedia.org
 
 ## Unreleased
 
+## 0.1.5 - 2023-05-26
+
+### Added
+
+- Added a link to the offline PlanktoScope documentation, served from the PlanktoScope itself.
+
 ## 0.1.4 - 2023-05-24
 
 ### Fixed
