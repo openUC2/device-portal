@@ -8,6 +8,12 @@ All dates in this file are given in the [UTC time zone](https://en.wikipedia.org
 
 ## Unreleased
 
+## 0.1.15 - 2024-01-11
+
+### Fixed
+
+- Fixed malformed HTML structure on the landing page.
+
 ## 0.1.14 - 2024-01-11
 
 ### Added
