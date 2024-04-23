@@ -8,6 +8,12 @@ All dates in this file are given in the [UTC time zone](https://en.wikipedia.org
 
 ## Unreleased
 
+## 0.2.1 - 2024-04-23
+
+### Fixed
+
+- The stylesheets were not generated correctly in 0.2.0; they should now be generated correctly again.
+
 ## 0.2.0 - 2024-04-22
 
 ### Changed
