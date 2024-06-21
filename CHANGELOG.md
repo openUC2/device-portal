@@ -8,6 +8,10 @@ All dates in this file are given in the [UTC time zone](https://en.wikipedia.org
 
 ## Unreleased
 
+### Removed
+
+- The deprecation warning for the `planktoscope.local` hostname has been removed, as that hostname is being undeprecated for v2024.0.0 (starting with v2024.0.0-beta.1).
+
 ## 0.2.2 - 2024-05-25
 
 ### Removed
