@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 All dates in this file are given in the [UTC time zone](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 
+## Unreleased
+
+### Added
+
+- A link has been added to a (new) offline/PDF copy of a draft of version 4 of [Fabien's PlanktoScope operation protocol](https://www.protocols.io/view/planktoscope-protocol-for-plankton-imaging-bp2l6bq3zgqe).
+- A link has been added to point to Fabien's PlanktoScope operation protocol, without pointing to a specific version - so it always goes to the latest version available.
+
+### Removed
+
+- The links to the offline/PDF copies of [version 2 of Fabien's PlanktoScope operation protocol](https://www.protocols.io/view/planktoscope-protocol-for-plankton-imaging-bp2l6bq3zgqe/v2) and [version 3 of Fabien's PlanktoScope operation protocol](https://www.protocols.io/view/planktoscope-protocol-for-plankton-imaging-bp2l6bq3zgqe/v3) have been removed. The links to the online versions have also been removed.
+
 ## 0.2.4 - 2024-11-28
 
 ### Added
