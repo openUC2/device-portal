@@ -27,16 +27,26 @@
         {{if not (hasSuffix ".local" $hostname)}}
           <article class="message is-warning">
             <div class="message-body">
-              Note: you are using the hostname <code>{{$hostname}}</code>, which only works when you
-              are connecting directly to the PlanktoScope through its Wi-Fi hotspot or through an
-              Ethernet cable. If/when you want to connect to the PlanktoScope through a Wi-Fi router
-              or Ethernet router (for example because you have connected your PlanktoScope to the
-              internet through an external Wi-Fi network, which disables the PlanktoScope's Wi-Fi
-              hotspot), you will instead need to use
+              Note: you are using the hostname <code>{{$hostname}}</code>, which might not work
+              outside of direct connections to the PlanktoScope through its Wi-Fi hotspot or through
+              an Ethernet cable. If/when you want to connect to the PlanktoScope through a Wi-Fi
+              router or Ethernet router (for example because you have connected your PlanktoScope to
+              the internet through an external Wi-Fi network, which disables the PlanktoScope's
+              Wi-Fi hotspot), you may instead need to use
               <a href="//pkscope-{{$machineName}}.local">pkscope-{{$machineName}}.local</a>
               to access this PlanktoScope (though
               <a href="//planktoscope.local">planktoscope.local</a>
               should also work if no other PlanktoScopes are connected to the router).
+            </div>
+          </article>
+        {{else if not (hasPrefix "pkscope-" $hostname)}}
+          <article class="message is-info">
+            <div class="message-body">
+              Note: you are using the hostname <code>{{$hostname}}</code>, which will be ambiguous
+              if/when you are potentially connected (either directly or indirectly) to multiple
+                PlanktoScopes. In such situations, you will instead need to use
+              <a href="//pkscope-{{$machineName}}.local">pkscope-{{$machineName}}.local</a>
+              to access this PlanktoScope.
             </div>
           </article>
         {{end}}

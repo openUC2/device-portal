@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 All dates in this file are given in the [UTC time zone](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 
+## 0.2.9 - 2025-02-08
+
+### Changed
+
+- Changed the warning about use of hostnames other than `pkscope-{machine-name}.local` to show a warning for non-mDNS hostnames and show an infobox for non-`pkscope-{machine-name}.local` mDNS names. This way, a box is always shown advertising `pkscope-{machine-name}.local` whenever that hostname isn't used.
+
 ## 0.2.8 - 2025-02-08
 
 ### Changed
