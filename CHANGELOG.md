@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 All dates in this file are given in the [UTC time zone](https://en.wikipedia.org/wiki/Coordinated_Universal_Time).
 
+## 0.2.8 - 2025-02-08
+
+### Changed
+
+- Changed the warning about use of hostnames other than `pkscope-{machine-name}.local` to only trigger for non-mDNS hostnames, as the mDNS hostnames `planktoscope.local` and `pkscope.local` will work over LANs (and not just direct connections) after <https://github.com/PlanktoScope/pallet-standard/pull/47>.
+
 ## 0.2.7 - 2025-01-18
 
 ### Added
