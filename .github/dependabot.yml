@@ -10,15 +10,21 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    commit-message:
+      prefix: build(go)
 
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "monthly"
+    commit-message:
+      prefix: build(ci)
 
   # Maintain dependencies for web app assets
   - package-ecosystem: "npm"
     directory: "/web/app"
     schedule:
       interval: "monthly"
+    commit-message:
+      prefix: build(npm)
