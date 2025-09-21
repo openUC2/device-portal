@@ -11,7 +11,6 @@ builds:
   targets:
     - linux_amd64_v1
     - linux_arm64
-    - linux_arm_7
     # - darwin_amd64_v1
     # - darwin_arm64
     # - windows_amd64_v1
@@ -48,8 +47,6 @@ changelog:
 release:
   prerelease: auto
   footer: |
-    **Full hand-crafted changelog**: [`CHANGELOG.md`]({{ .GitURL }}/blob/main/CHANGELOG.md)
-
     {{ if and .Tag .PreviousTag }}
       **Commit history**: [{{ .PreviousTag }}...{{ .Tag }}]({{ .GitURL }}/compare/{{ .Tag }}...{{ .PreviousTag }})
     {{ else if .PreviousTag }}
@@ -64,10 +61,10 @@ dockers:
     dockerfile: "Dockerfile"
     use: buildx
     image_templates:
-    - "ghcr.io/planktoscope/device-portal:latest-amd64"
-    - "ghcr.io/planktoscope/device-portal:{{ .Major }}-amd64"
-    - "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}-amd64"
-    - "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-amd64"
+    - "ghcr.io/openuc2/device-portal:latest-amd64"
+    - "ghcr.io/openuc2/device-portal:{{ .Major }}-amd64"
+    - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}-amd64"
+    - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-amd64"
     build_flag_templates:
     - "--pull"
     - "--platform=linux/amd64"
@@ -84,10 +81,10 @@ dockers:
     use: buildx
     goarch: arm64
     image_templates:
-    - "ghcr.io/planktoscope/device-portal:latest-arm64v8"
-    - "ghcr.io/planktoscope/device-portal:{{ .Major }}-arm64v8"
-    - "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}-arm64v8"
-    - "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-arm64v8"
+    - "ghcr.io/openuc2/device-portal:latest-arm64v8"
+    - "ghcr.io/openuc2/device-portal:{{ .Major }}-arm64v8"
+    - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}-arm64v8"
+    - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-arm64v8"
     build_flag_templates:
     - "--pull"
     - "--platform=linux/arm64/v8"
@@ -97,47 +94,22 @@ dockers:
     - "--label=org.opencontainers.image.version={{.Version}}"
     - "--label=org.opencontainers.image.source={{.GitURL}}"
     - "--label=org.opencontainers.image.licenses=(Apache-2.0 OR BlueOak-1.0.0)"
-  - id: device-portal-armv7
-    ids:
-      - device-portal
-    dockerfile: "Dockerfile"
-    use: buildx
-    goarch: arm
-    goarm: 7
-    image_templates:
-    - "ghcr.io/planktoscope/device-portal:latest-armv7"
-    - "ghcr.io/planktoscope/device-portal:{{ .Major }}-armv7"
-    - "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}-armv7"
-    - "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-armv7"
-    build_flag_templates:
-    - "--pull"
-    - "--platform=linux/arm/v7"
-    - "--label=org.opencontainers.image.created={{.Date}}"
-    - "--label=org.opencontainers.image.name={{.ProjectName}}"
-    - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-    - "--label=org.opencontainers.image.version={{.Version}}"
-    - "--label=org.opencontainers.image.source={{.GitURL}}"
-    - "--label=org.opencontainers.image.licenses=(Apache-2.0 OR BlueOak-1.0.0)"
 
 docker_manifests:
   # device-portal
-  - name_template: "ghcr.io/planktoscope/device-portal:latest"
+  - name_template: "ghcr.io/openuc2/device-portal:latest"
     image_templates:
-      - "ghcr.io/planktoscope/device-portal:latest-amd64"
-      - "ghcr.io/planktoscope/device-portal:latest-arm64v8"
-      - "ghcr.io/planktoscope/device-portal:latest-armv7"
-  - name_template: "ghcr.io/planktoscope/device-portal:{{ .Major }}"
+      - "ghcr.io/openuc2/device-portal:latest-amd64"
+      - "ghcr.io/openuc2/device-portal:latest-arm64v8"
+  - name_template: "ghcr.io/openuc2/device-portal:{{ .Major }}"
     image_templates:
-      - "ghcr.io/planktoscope/device-portal:{{ .Major }}-amd64"
-      - "ghcr.io/planktoscope/device-portal:{{ .Major }}-arm64v8"
-      - "ghcr.io/planktoscope/device-portal:{{ .Major }}-armv7"
-  - name_template: "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}"
+      - "ghcr.io/openuc2/device-portal:{{ .Major }}-amd64"
+      - "ghcr.io/openuc2/device-portal:{{ .Major }}-arm64v8"
+  - name_template: "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}"
     image_templates:
-      - "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}-amd64"
-      - "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}-arm64v8"
-      - "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}-armv7"
-  - name_template: "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}"
+      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}-amd64"
+      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}-arm64v8"
+  - name_template: "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}"
     image_templates:
-      - "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-amd64"
-      - "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-arm64v8"
-      - "ghcr.io/planktoscope/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-armv7"
+      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-amd64"
+      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-arm64v8"

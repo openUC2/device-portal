@@ -1,4 +1,4 @@
-// Package routes contains the route handlers for the Planktoscope Live server.
+// Package routes contains the route handlers for the web server.
 package routes
 
 import (
