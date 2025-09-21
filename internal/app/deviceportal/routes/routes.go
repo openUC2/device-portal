@@ -4,9 +4,9 @@ package routes
 import (
 	"github.com/sargassum-world/godest"
 
-	"github.com/PlanktoScope/device-portal/internal/app/deviceportal/client"
-	"github.com/PlanktoScope/device-portal/internal/app/deviceportal/routes/assets"
-	"github.com/PlanktoScope/device-portal/internal/app/deviceportal/routes/home"
+	"github.com/openUC2/device-portal/internal/app/deviceportal/client"
+	"github.com/openUC2/device-portal/internal/app/deviceportal/routes/assets"
+	"github.com/openUC2/device-portal/internal/app/deviceportal/routes/home"
 )
 
 type Handlers struct {

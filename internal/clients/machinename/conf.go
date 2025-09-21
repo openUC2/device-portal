@@ -14,7 +14,7 @@ type Config struct {
 }
 
 func GetConfig() (c Config, err error) {
-	// This is a file path specific to the PlanktoScope OS
+	// This is a file path specific to ImSwitch OS
 	const defaultNameFilePath = "/run/machine-name"
 	c.NameFile = env.GetString(envPrefix+"NAMEFILE", defaultNameFilePath)
 

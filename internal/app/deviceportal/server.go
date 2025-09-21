@@ -1,4 +1,4 @@
-// Package deviceportal provides the PlanktoScope device-portal server.
+// Package deviceportal provides the ImSwitch OS device-portal server.
 package deviceportal
 
 import (
@@ -17,12 +17,12 @@ import (
 	"github.com/unrolled/secure/cspbuilder"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/PlanktoScope/device-portal/internal/app/deviceportal/client"
-	"github.com/PlanktoScope/device-portal/internal/app/deviceportal/conf"
-	"github.com/PlanktoScope/device-portal/internal/app/deviceportal/routes"
-	"github.com/PlanktoScope/device-portal/internal/app/deviceportal/routes/assets"
-	"github.com/PlanktoScope/device-portal/internal/app/deviceportal/tmplfunc"
-	"github.com/PlanktoScope/device-portal/web"
+	"github.com/openUC2/device-portal/internal/app/deviceportal/client"
+	"github.com/openUC2/device-portal/internal/app/deviceportal/conf"
+	"github.com/openUC2/device-portal/internal/app/deviceportal/routes"
+	"github.com/openUC2/device-portal/internal/app/deviceportal/routes/assets"
+	"github.com/openUC2/device-portal/internal/app/deviceportal/tmplfunc"
+	"github.com/openUC2/device-portal/web"
 )
 
 type Server struct {

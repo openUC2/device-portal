@@ -1,17 +1,30 @@
 # device-portal
-A browser landing page for user access to the PlanktoScope
+A web browser landing page for easy user access to deployed apps
 
 ## Introduction
 
-Users connect to the PlanktoScope from the web browser by opening a URL like http://home.planktoscope . This tool provides a web page with a list of links to the various network services running on the PlanktoScope (e.g. the Node-RED frontend dashboard, the Cockpit system administration panel, or the system file manager) for easy access. It is meant to be served from a reverse-proxy on port 80 along with all other network services, configured as in https://github.com/PlanktoScope/pallets - otherwise, the links will be incorrect.
+Users connect to [ImSwitch OS](https://github.com/openuc2/imswitch-os) (which runs on a Raspberry Pi
+computer) from a web browser on a client device by opening a URL like <http://home.uc2>.
+This tool provides a web page with a list of links to the various network services running on the OS
+(e.g. the ImSwitch GUI, the Cockpit system administration panel, or the system file manager) for
+easy access. It is meant to be served from a reverse-proxy on port 80 along with all other network
+services, configured as in <https://github.com/openUC2/pallet> - otherwise, the links will be
+incorrect.
 
-In the future, this tool will hopefully give the user (or otherwise direct the user to) a setup wizard for configuring localization settings (e.g. for languages and wifi networks) upon the first boot of the PlanktoScope.
+In the future, this tool might be extended to give the user (or otherwise direct the user to) a
+setup wizard for configuring localization settings (e.g. for languages and wifi networks) upon the
+first boot of the OS.
 
 ## Usage
 
-### Deployment
+### Local Deployment
 
-First, you will need to download device-portal, which is available as a single self-contained executable file. You should visit this repository's [releases page](https://github.com/PlanktoScope/device-portal/releases/latest) and download an archive file for your platform and CPU architecture; for example, on a Raspberry Pi 4, you should download the archive named `device-portal_{version number}_linux_arm.tar.gz` (where the version number should be substituted). You can extract the device-portal binary from the archive using a command like:
+First, you will need to download device-portal, which is available as a single self-contained
+executable file. You should visit this repository's
+[releases page](https://github.com/openUC2/device-portal/releases/latest) and download an archive
+file for your platform and CPU architecture; for example, on a Raspberry Pi 5, you should download
+the archive named `device-portal_{version number}_linux_arm.tar.gz` (where the version number should
+be substituted). You can extract the device-portal binary from the archive using a command like:
 ```
 tar -xzf device-portal_{version number}_{os}_{cpu architecture}.tar.gz device-portal
 ```
@@ -23,13 +36,15 @@ Once you have device-portal, you can run it as follows on a Raspberry Pi:
 ./device-portal
 ```
 
-Then you can view the landing page at http://localhost:3000 . Note that if you are running it on a computer other than the Raspberry Pi with the standard PlanktoScope OS, then you will need to set some environment variables (see below) to non-default values.
+Then you can view the landing page at <http://localhost:3000> . Note that if you are running it on a
+computer other than the Raspberry Pi with ImSwitch OS, then you will need to set some environment
+variables (see below) to non-default values.
 
 ### Development
 
 To install various backend development tools, run `make install`. You will need to have installed Go first.
 
-Before you start the server for the first time, you'll need to generate the webapp build artifacts by running `make buildweb` (which requires you to have first installed [Node.js v16](https://nodejs.org/en/) (lts/gallium) and [Yarn Classic](https://classic.yarnpkg.com/lang/en/)). Then you can start the server by running `make run` with the appropriate environment variables (see below). You will need to have installed golang first. Any time you modify the webapp files (in the web/app directory), you'll need to run `make buildweb` again to rebuild the bundled CSS and JS. Whenever you use a CSS selector in a template file (in the web/templates directory), you should *also* run `make buildweb`, because the build process for the bundled CSS omits any selectors not used by the templates.
+Before you start the server for the first time, you'll need to generate the webapp build artifacts by running `make buildweb` (which requires you to have first installed [Node.js](https://nodejs.org/en/) and [Yarn Classic](https://classic.yarnpkg.com/lang/en/)). Then you can start the server by running `make run` with the appropriate environment variables (see below). You will need to have installed golang first. Any time you modify the webapp files (in the web/app directory), you'll need to run `make buildweb` again to rebuild the bundled CSS and JS. Whenever you use a CSS selector in a template file (in the web/templates directory), you should *also* run `make buildweb`, because the build process for the bundled CSS omits any selectors not used by the templates.
 
 ### Building
 
@@ -39,7 +54,7 @@ To execute the full build pipeline, run `make`; to build the docker images, run 
 
 ### Environment Variables
 
-If you are running device-portal on a computer which is not a Raspberry Pi with the standard PlanktoScope OS, then you'll need to set some environment variables. Specifically, you'll need to set:
+If you are running device-portal on a computer which is not a Raspberry Pi with the standard ImSwitch OS, then you'll need to set some environment variables. Specifically, you'll need to set:
 
 - Either `MACHINENAME_NAME`, which should be a string representing the name of the machine to be displayed on the landing page, or `MACHINENAME_NAMEFILE`, which should be the path to a file containing the name of the machine to be displayed on the landing page.
 
@@ -55,8 +70,16 @@ MACHINENAME_NAME=metal-slope-23501 make run
 
 Except where otherwise indicated, source code provided here is covered by the following information:
 
-Copyright Ethan Li and PlanktoScope project contributors
+Copyright Ethan Li and openUC2 project contributors
 
 SPDX-License-Identifier: `Apache-2.0 OR BlueOak-1.0.0`
 
 You can use the source code provided here either under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) or under the [Blue Oak Model License 1.0.0](https://blueoakcouncil.org/license/1.0.0); you get to decide. We are making the software available under the Apache license because it's [OSI-approved](https://writing.kemitchell.com/2019/05/05/Rely-on-OSI.html), but we like the Blue Oak Model License more because it's easier to read and understand.
+
+### Origins
+
+The [github.com/openUC2/device-portal](https://github.com/openUC2/device-portal) repository was
+initialized by Ethan Li as a hard fork of
+[github.com/PlanktoScope/device-portal](https://github.com/PlanktoScope/device-portal), from a
+commit of the PlanktoScope/device-portal repository which only included contributions made by Ethan
+Li (but not any other contributors to the PlanktoScope project).

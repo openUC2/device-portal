@@ -3,9 +3,9 @@ linters-settings:
     sections:
       - standard
       - default
-      - prefix(github.com/PlanktoScope/device-portal)
+      - prefix(github.com/openUC2/device-portal)
   goimports:
-    local-prefixes: github.com/PlanktoScope/device-portal
+    local-prefixes: github.com/openUC2/device-portal
   gocyclo:
     min-complexity: 15
   govet:

@@ -8,7 +8,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/sargassum-world/godest"
 
-	"github.com/PlanktoScope/device-portal/internal/clients/machinename"
+	"github.com/openUC2/device-portal/internal/clients/machinename"
 )
 
 type Handlers struct {

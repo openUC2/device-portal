@@ -1,4 +1,4 @@
-module github.com/PlanktoScope/device-portal
+module github.com/openUC2/device-portal
 
 go 1.24
 

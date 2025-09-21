@@ -9,8 +9,8 @@ import (
 
 	"github.com/labstack/echo/v4"
 
-	"github.com/PlanktoScope/device-portal/internal/app/deviceportal"
-	"github.com/PlanktoScope/device-portal/internal/app/deviceportal/conf"
+	"github.com/openUC2/device-portal/internal/app/deviceportal"
+	"github.com/openUC2/device-portal/internal/app/deviceportal/conf"
 )
 
 const shutdownTimeout = 5 // sec

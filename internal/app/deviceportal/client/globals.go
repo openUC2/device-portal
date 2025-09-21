@@ -6,8 +6,8 @@ import (
 	"github.com/sargassum-world/godest"
 	"github.com/sargassum-world/godest/clientcache"
 
-	"github.com/PlanktoScope/device-portal/internal/app/deviceportal/conf"
-	"github.com/PlanktoScope/device-portal/internal/clients/machinename"
+	"github.com/openUC2/device-portal/internal/app/deviceportal/conf"
+	"github.com/openUC2/device-portal/internal/clients/machinename"
 )
 
 type BaseGlobals struct {
