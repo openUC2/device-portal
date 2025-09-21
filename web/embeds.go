@@ -42,7 +42,7 @@ var (
 //go:embed app/public/build/bundle-eager.js
 var bundleEagerJS string
 
-//go:embed app/public/build/theme-eager.min.css
+//go:embed app/public/build/theme-eager.css
 var bundleEagerCSS string
 
 func NewEmbeds() godest.Embeds {
