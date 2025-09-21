@@ -8,8 +8,8 @@ computer) from a web browser on a client device by opening a URL like <http://ho
 This tool provides a web page with a list of links to the various network services running on the OS
 (e.g. the ImSwitch GUI, the Cockpit system administration panel, or the system file manager) for
 easy access. It is meant to be served from a reverse-proxy on port 80 along with all other network
-services, configured as in <https://github.com/openUC2/pallet> - otherwise, the links will be
-incorrect.
+services, configured as in [openUC2/pallet](https://github.com/openUC2/pallet) - otherwise, the links
+will be incorrect.
 
 In the future, this tool might be extended to give the user (or otherwise direct the user to) a
 setup wizard for configuring localization settings (e.g. for languages and wifi networks) upon the
