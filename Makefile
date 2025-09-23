@@ -69,10 +69,10 @@ diff: ## git diff
 	RES=$$(git status --porcelain) ; if [ -n "$$RES" ]; then echo $$RES && exit 1 ; fi
 
 .PHONY: build
-build: ## goreleaser --snapshot --skip-publish --clean
+build: ## goreleaser --snapshot --skip=publish --clean
 build: install buildweb
 	$(call print-target)
-	go tool goreleaser --snapshot --skip-publish --clean
+	go tool goreleaser --snapshot --skip=publish --clean
 
 .PHONY: release
 release: ## goreleaser --clean

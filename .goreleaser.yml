@@ -1,3 +1,7 @@
+version: 2
+
+gomod:
+  proxy: true
 before:
   hooks:
     - go mod download
@@ -6,6 +10,20 @@ builds:
 - id: device-portal
   main: ./cmd/deviceportal
   binary: device-portal
+  mod_timestamp: "{{ .CommitTimestamp }}"
+  flags:
+    - -trimpath
+  ldflags:
+    - -w
+    - -X main.buildSummary={{ .Summary }}
+    - -X main.buildVersion={{ .Version }}
+    - -X main.buildCommitFull={{ .FullCommit }}
+    - -X main.buildCommitShort={{ .ShortCommit }}
+    - -X main.buildCommitDate={{ .CommitDate }}
+    - -X main.buildCommitTimestamp={{ .CommitTimestamp }}
+    - -X main.buildReleaseURL={{ .ReleaseURL }}
+    - -X main.buildRepo={{ .GitURL }}
+    - -X main.buildSystem=goreleaser
   env:
     - CGO_ENABLED=0
   targets:
@@ -17,11 +35,11 @@ builds:
 
 archives:
   - id: device-portal
-    builds: ["device-portal"]
+    ids: ["device-portal"]
     name_template: "device-portal_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     format_overrides:
     - goos: windows
-      format: zip
+      formats: zip
 
 changelog:
   use: github
