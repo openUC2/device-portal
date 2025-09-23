@@ -37,7 +37,7 @@ vet: ## go vet
 .PHONY: fmt
 fmt: ## go fmt
 	$(call print-target)
-	go fmt ./...
+	go tool golangci-lint fmt
 	cd web/app && yarn format
 
 .PHONY: spell
