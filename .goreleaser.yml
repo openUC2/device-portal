@@ -1,3 +1,7 @@
+version: 2
+
+gomod:
+  proxy: true
 before:
   hooks:
     - go mod download
@@ -6,6 +10,20 @@ builds:
 - id: device-portal
   main: ./cmd/deviceportal
   binary: device-portal
+  mod_timestamp: "{{ .CommitTimestamp }}"
+  flags:
+    - -trimpath
+  ldflags:
+    - -w
+    - -X main.buildSummary={{ .Summary }}
+    - -X main.buildVersion={{ .Version }}
+    - -X main.buildCommitFull={{ .FullCommit }}
+    - -X main.buildCommitShort={{ .ShortCommit }}
+    - -X main.buildCommitDate={{ .CommitDate }}
+    - -X main.buildCommitTimestamp={{ .CommitTimestamp }}
+    - -X main.buildReleaseURL={{ .ReleaseURL }}
+    - -X main.buildRepo={{ .GitURL }}
+    - -X main.buildSystem=goreleaser
   env:
     - CGO_ENABLED=0
   targets:
@@ -17,11 +35,19 @@ builds:
 
 archives:
   - id: device-portal
-    builds: ["device-portal"]
+    ids: ["device-portal"]
     name_template: "device-portal_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     format_overrides:
-    - goos: windows
-      format: zip
+      - goos: windows
+        formats: zip
+    files:
+      - 'LICENSE*'
+      - 'README*'
+      - 'CHANGELOG*'
+      - 'license*'
+      - 'readme*'
+      - 'changelog*'
+      - 'web/templates/**'
 
 changelog:
   use: github
@@ -47,11 +73,11 @@ changelog:
 release:
   prerelease: auto
   footer: |
-    {{ if and .Tag .PreviousTag }}
+    {{ if and .Tag .PreviousTag -}}
       **Commit history**: [{{ .PreviousTag }}...{{ .Tag }}]({{ .GitURL }}/compare/{{ .Tag }}...{{ .PreviousTag }})
-    {{ else if .PreviousTag }}
+    {{- else if .PreviousTag- }}
       **Commit history**: [{{ .PreviousTag }}...{{ .ShortCommit }}]({{ .GitURL }}/compare/{{ .Commit }}...{{ .PreviousTag }})
-    {{ end }}
+    {{- end }}
 
 dockers:
   # device-portal
@@ -61,19 +87,21 @@ dockers:
     dockerfile: "Dockerfile"
     use: buildx
     image_templates:
-    - "ghcr.io/openuc2/device-portal:latest-amd64"
-    - "ghcr.io/openuc2/device-portal:{{ .Major }}-amd64"
-    - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}-amd64"
-    - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-amd64"
+      - "ghcr.io/openuc2/device-portal:latest-amd64"
+      - "ghcr.io/openuc2/device-portal:{{ .Major }}-amd64"
+      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}-amd64"
+      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-amd64"
     build_flag_templates:
-    - "--pull"
-    - "--platform=linux/amd64"
-    - "--label=org.opencontainers.image.created={{.Date}}"
-    - "--label=org.opencontainers.image.name={{.ProjectName}}"
-    - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-    - "--label=org.opencontainers.image.version={{.Version}}"
-    - "--label=org.opencontainers.image.source={{.GitURL}}"
-    - "--label=org.opencontainers.image.licenses=(Apache-2.0 OR BlueOak-1.0.0)"
+      - "--pull"
+      - "--platform=linux/amd64"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.name={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.source={{.GitURL}}"
+      - "--label=org.opencontainers.image.licenses=(Apache-2.0 OR BlueOak-1.0.0)"
+    extra_files:
+      - "web/templates"
   - id: device-portal-arm64v8
     ids:
       - device-portal
@@ -81,19 +109,21 @@ dockers:
     use: buildx
     goarch: arm64
     image_templates:
-    - "ghcr.io/openuc2/device-portal:latest-arm64v8"
-    - "ghcr.io/openuc2/device-portal:{{ .Major }}-arm64v8"
-    - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}-arm64v8"
-    - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-arm64v8"
+      - "ghcr.io/openuc2/device-portal:latest-arm64v8"
+      - "ghcr.io/openuc2/device-portal:{{ .Major }}-arm64v8"
+      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}-arm64v8"
+      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-arm64v8"
     build_flag_templates:
-    - "--pull"
-    - "--platform=linux/arm64/v8"
-    - "--label=org.opencontainers.image.created={{.Date}}"
-    - "--label=org.opencontainers.image.name={{.ProjectName}}"
-    - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-    - "--label=org.opencontainers.image.version={{.Version}}"
-    - "--label=org.opencontainers.image.source={{.GitURL}}"
-    - "--label=org.opencontainers.image.licenses=(Apache-2.0 OR BlueOak-1.0.0)"
+      - "--pull"
+      - "--platform=linux/arm64/v8"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.name={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.source={{.GitURL}}"
+      - "--label=org.opencontainers.image.licenses=(Apache-2.0 OR BlueOak-1.0.0)"
+    extra_files:
+      - "web/templates"
 
 docker_manifests:
   # device-portal

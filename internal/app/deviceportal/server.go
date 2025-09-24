@@ -40,8 +40,13 @@ func NewServer(config conf.Config, logger godest.Logger) (s *Server, err error) 
 	}
 
 	s.Embeds = web.NewEmbeds()
+	templatesOverlay := &OverlayFS{
+		Upper: s.Globals.Templates.GetFS(),
+		Lower: s.Embeds.TemplatesFS,
+	}
+	s.Embeds.TemplatesFS = templatesOverlay
 	s.Inlines = web.NewInlines()
-	if s.Renderer, err = godest.NewTemplateRenderer(
+	if s.Renderer, err = godest.NewLazyTemplateRenderer(
 		s.Embeds, s.Inlines, sprig.FuncMap(), tmplfunc.FuncMap(
 			tmplfunc.NewHashedNamers(assets.AppURLPrefix, assets.StaticURLPrefix, s.Embeds),
 		),
@@ -148,7 +153,7 @@ func (s *Server) Register(e *echo.Echo) error {
 	// TODO: enable Prometheus and rate-limiting
 
 	// Handlers
-	e.HTTPErrorHandler = NewHTTPErrorHandler(s.Renderer)
+	e.HTTPErrorHandler = NewHTTPErrorHandler(s.Renderer, s.Embeds.TemplatesFS)
 	s.Handlers.Register(e, s.Embeds)
 
 	return nil

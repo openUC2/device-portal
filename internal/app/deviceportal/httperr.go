@@ -1,6 +1,7 @@
 package deviceportal
 
 import (
+	"io/fs"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -15,7 +16,7 @@ type ErrorData struct {
 	Messages []string
 }
 
-func NewHTTPErrorHandler(tr godest.TemplateRenderer) echo.HTTPErrorHandler {
+func NewHTTPErrorHandler(tr godest.TemplateRenderer, templatesFS fs.FS) echo.HTTPErrorHandler {
 	tr.MustHave("app/httperr.page.tmpl")
 	return func(err error, c echo.Context) {
 		c.Logger().Error(err)
@@ -31,11 +32,20 @@ func NewHTTPErrorHandler(tr godest.TemplateRenderer) echo.HTTPErrorHandler {
 		}
 
 		// Produce output
-		if perr := tr.Page(
+		perr := tr.Page(
 			c.Response(), c.Request(), code, "app/httperr.page.tmpl", errorData, struct{}{},
 			godest.WithUncacheable(),
-		); perr != nil {
-			c.Logger().Error(errors.Wrap(perr, "couldn't render error page in error handler"))
+		)
+		if perr != nil {
+			c.Logger().Error(errors.Wrap(perr, "couldn't render templated error page in error handler"))
+			fallbackErrorPage, ferr := fs.ReadFile(templatesFS, "app/httperr.html")
+			if ferr != nil {
+				c.Logger().Error(errors.Wrap(perr, "couldn't load fallback error page in error handler"))
+			}
+			perr = c.HTML(http.StatusInternalServerError, string(fallbackErrorPage))
+			if perr != nil {
+				c.Logger().Error(errors.Wrap(perr, "couldn't send fallback error page in error handler"))
+			}
 		}
 	}
 }
