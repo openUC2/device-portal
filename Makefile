@@ -13,6 +13,7 @@ clean: ## remove files created during build pipeline
 	$(call print-target)
 	rm -rf dist
 	rm -f coverage.*
+	rm -rf web/app/public/build
 
 .PHONY: install
 install: ## go install tools

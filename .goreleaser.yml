@@ -32,6 +32,8 @@ builds:
     # - darwin_amd64_v1
     # - darwin_arm64
     # - windows_amd64_v1
+  hooks:
+    pre: make buildweb
 
 archives:
   - id: device-portal
