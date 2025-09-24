@@ -1,7 +1,7 @@
 version: 2
 
-#gomod:
-  # proxy: true # proxying breaks embedding of files produced by `make buildweb` during release
+# gomod:
+#   proxy: true # proxying breaks embedding of files produced by `make buildweb` during release
 before:
   hooks:
     - go mod download
@@ -87,10 +87,8 @@ dockers:
     dockerfile: "Dockerfile"
     use: buildx
     image_templates:
-      - "ghcr.io/openuc2/device-portal:latest-amd64"
-      - "ghcr.io/openuc2/device-portal:{{ .Major }}-amd64"
-      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}-amd64"
-      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-amd64"
+      - "ghcr.io/openuc2/{{ .ProjectName }}:latest-amd64"
+      - "ghcr.io/openuc2/{{ .ProjectName }}:{{ .Version }}-amd64"
     build_flag_templates:
       - "--pull"
       - "--platform=linux/amd64"
@@ -109,10 +107,8 @@ dockers:
     use: buildx
     goarch: arm64
     image_templates:
-      - "ghcr.io/openuc2/device-portal:latest-arm64v8"
-      - "ghcr.io/openuc2/device-portal:{{ .Major }}-arm64v8"
-      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}-arm64v8"
-      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-arm64v8"
+      - "ghcr.io/openuc2/{{ .ProjectName }}:latest-arm64v8"
+      - "ghcr.io/openuc2/{{ .ProjectName }}:{{ .Version }}-arm64v8"
     build_flag_templates:
       - "--pull"
       - "--platform=linux/arm64/v8"
@@ -127,19 +123,11 @@ dockers:
 
 docker_manifests:
   # device-portal
-  - name_template: "ghcr.io/openuc2/device-portal:latest"
+  - name_template: "ghcr.io/openuc2/{{ .ProjectName }}:latest"
     image_templates:
-      - "ghcr.io/openuc2/device-portal:latest-amd64"
-      - "ghcr.io/openuc2/device-portal:latest-arm64v8"
-  - name_template: "ghcr.io/openuc2/device-portal:{{ .Major }}"
+      - "ghcr.io/openuc2/{{ .ProjectName }}:latest-amd64"
+      - "ghcr.io/openuc2/{{ .ProjectName }}:latest-arm64v8"
+  - name_template: "ghcr.io/openuc2/{{ .ProjectName }}:{{ .Version }}"
     image_templates:
-      - "ghcr.io/openuc2/device-portal:{{ .Major }}-amd64"
-      - "ghcr.io/openuc2/device-portal:{{ .Major }}-arm64v8"
-  - name_template: "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}"
-    image_templates:
-      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}-amd64"
-      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}-arm64v8"
-  - name_template: "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}"
-    image_templates:
-      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-amd64"
-      - "ghcr.io/openuc2/device-portal:{{ .Major }}.{{ .Minor }}.{{ .Patch }}-arm64v8"
+      - "ghcr.io/openuc2/{{ .ProjectName }}:{{ .Version }}-amd64"
+      - "ghcr.io/openuc2/{{ .ProjectName }}:{{ .Version }}-arm64v8"
