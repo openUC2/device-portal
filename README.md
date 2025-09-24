@@ -54,6 +54,8 @@ To execute the full build pipeline, run `make`; to build the docker images, run 
 
 ### Environment Variables
 
+#### Machine Name
+
 If you are running device-portal on a computer which is not a Raspberry Pi with the standard ImSwitch OS, then you'll need to set some environment variables. Specifically, you'll need to set:
 
 - Either `MACHINENAME_NAME`, which should be a string representing the name of the machine to be displayed on the landing page, or `MACHINENAME_NAMEFILE`, which should be the path to a file containing the name of the machine to be displayed on the landing page.
@@ -64,6 +66,39 @@ For example, you could run device-portal with the machine name `metal-slope-2350
 MACHINENAME_NAME=metal-slope-23501 ./device-portal
 # If you are developing the project:
 MACHINENAME_NAME=metal-slope-23501 make run
+```
+
+#### Custom Templates
+
+You can override the default webpage templates embedded in the device-portal binary by providing a path to the templates directory with the `TEMPLATES_PATH` variable, relative to the current working directory in which you start the device-portal program. For example, you could provide a more-minimal "hello world" landing page by creating a new file named `home.page.tmpl` with following contents in a new `custom-templates/home` subdirectory in the directory from which you will launch device-portal:
+```
+{{template "shared/base.layout.tmpl" .}}
+
+{{define "title" -}}
+  {{- $machineName := .Data.MachineName -}}
+  Machine {{$machineName}}
+{{- end}}
+{{define "description"}}Machine portal{{end}}
+
+{{define "content"}}
+  <main>
+    <section class="section content">
+      <div class="container">
+        <h1>Hello, world!</h1>
+        <p>
+          Greetings from a custom template!
+        </p>
+    </section>
+  </main>
+{{end}}
+```
+
+and then running the following command:
+```
+# If you downloaded a device-portal binary:
+TEMPLATES_PATH=custom-templates MACHINENAME_NAME=template-test ./device-portal
+# If you are developing the project:
+TEMPLATES_PATH=custom-templates MACHINENAME_NAME=template-test make run
 ```
 
 ## Licensing
