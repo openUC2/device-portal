@@ -1,7 +1,7 @@
 version: 2
 
-gomod:
-  proxy: true
+#gomod:
+  # proxy: true # proxying breaks embedding of files produced by `make buildweb` during release
 before:
   hooks:
     - go mod download
@@ -32,8 +32,6 @@ builds:
     # - darwin_amd64_v1
     # - darwin_arm64
     # - windows_amd64_v1
-  hooks:
-    pre: make buildweb
 
 archives:
   - id: device-portal
