@@ -8,12 +8,7 @@ computer) from a web browser on a client device by opening a URL like <http://ho
 This tool provides a web page with a list of links to the various network services running on the OS
 (e.g. the ImSwitch GUI, the Cockpit system administration panel, or the system file manager) for
 easy access. It is meant to be served from a reverse-proxy on port 80 along with all other network
-services, configured as in [openUC2/pallet](https://github.com/openUC2/pallet) - otherwise, the links
-will be incorrect.
-
-In the future, this tool might be extended to give the user (or otherwise direct the user to) a
-setup wizard for configuring localization settings (e.g. for languages and wifi networks) upon the
-first boot of the OS.
+services, configured as in [openUC2/pallet](https://github.com/openUC2/pallet).
 
 ## Usage
 
@@ -44,7 +39,7 @@ variables (see below) to non-default values.
 
 To install various backend development tools, run `make install`. You will need to have installed Go first.
 
-Before you start the server for the first time, you'll need to generate the webapp build artifacts by running `make buildweb` (which requires you to have first installed [Node.js](https://nodejs.org/en/) and [Yarn Classic](https://classic.yarnpkg.com/lang/en/)). Then you can start the server by running `make run` with the appropriate environment variables (see below). You will need to have installed golang first. Any time you modify the webapp files (in the web/app directory), you'll need to run `make buildweb` again to rebuild the bundled CSS and JS. Whenever you use a CSS selector in a template file (in the web/templates directory), you should *also* run `make buildweb`, because the build process for the bundled CSS omits any selectors not used by the templates.
+Before you start the server for the first time, you'll need to generate the webapp build artifacts by running `make buildweb` (which requires you to have first installed [Node.js](https://nodejs.org/en/) and [Yarn Classic](https://classic.yarnpkg.com/lang/en/)). Then you can start the server by running `make run` with the appropriate environment variables (see below). You will need to have installed golang first. Any time you modify the webapp files (in the web/app directory), you'll need to run `make buildweb` again to rebuild the bundled CSS and JS.
 
 ### Building
 

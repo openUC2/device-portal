@@ -12,6 +12,10 @@ updates:
       interval: "monthly"
     commit-message:
       prefix: build(go)
+    groups:
+      go:
+        patterns:
+          - '*'
 
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
@@ -20,6 +24,10 @@ updates:
       interval: "monthly"
     commit-message:
       prefix: build(ci)
+    groups:
+      ci:
+        patterns:
+          - '*'
 
   # Maintain dependencies for web app assets
   - package-ecosystem: "npm"
@@ -28,3 +36,7 @@ updates:
       interval: "monthly"
     commit-message:
       prefix: build(npm)
+    groups:
+      npm:
+        patterns:
+          - '*'
