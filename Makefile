@@ -87,7 +87,7 @@ run: ## go run
 
 .PHONY: runlive
 runlive: ## go run
-	@TEMPLATES_PATH=./web/templates go run -race ./cmd/deviceadmin
+	@TEMPLATES_PATH=./web/templates go run -race ./cmd/deviceportal
 
 .PHONY: go-clean
 go-clean: ## go clean build, test and modules caches
