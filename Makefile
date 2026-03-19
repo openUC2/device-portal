@@ -90,11 +90,11 @@ release: install buildweb
 
 .PHONY: run
 run: ## go run
-	@go run -race ./cmd/deviceportal
+	@go run -race .
 
 .PHONY: runlive
 runlive: ## go run
-	@TEMPLATES_PATH=./web/templates go run -race ./cmd/deviceportal
+	@TEMPLATES_PATH=./web/templates go run -race .
 
 .PHONY: go-clean
 go-clean: ## go clean build, test and modules caches

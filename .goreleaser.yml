@@ -8,7 +8,7 @@ before:
 
 builds:
 - id: device-portal
-  main: ./cmd/deviceportal
+  main: .
   binary: device-portal
   mod_timestamp: "{{ .CommitTimestamp }}"
   flags:
