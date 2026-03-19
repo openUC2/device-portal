@@ -1,4 +1,4 @@
-package deviceportal
+package server
 
 import (
 	"cmp"

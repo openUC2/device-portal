@@ -4,9 +4,9 @@ package routes
 import (
 	"github.com/sargassum-world/godest"
 
-	"github.com/openUC2/device-portal/internal/app/deviceportal/client"
-	"github.com/openUC2/device-portal/internal/app/deviceportal/routes/assets"
-	"github.com/openUC2/device-portal/internal/app/deviceportal/routes/home"
+	"github.com/openUC2/device-portal/internal/app/server/client"
+	"github.com/openUC2/device-portal/internal/app/server/routes/assets"
+	"github.com/openUC2/device-portal/internal/app/server/routes/home"
 )
 
 type Handlers struct {
