@@ -65,7 +65,7 @@ MACHINENAME_NAME=metal-slope-23501 make run
 
 #### Custom Templates
 
-You can override the default webpage templates embedded in the device-portal binary by providing a path to the templates directory with the `TEMPLATES_PATH` variable, relative to the current working directory in which you start the device-portal program. For example, you could provide a more-minimal "hello world" landing page by creating a new file named `home.page.tmpl` with following contents in a new `custom-templates/home` subdirectory in the directory from which you will launch device-portal:
+You can override the default webpage templates embedded in the device-portal binary by providing a path to the templates directory with the `TEMPLATES_PATH` variable, relative to the current working directory in which you start the device-portal program. For example, you could provide a more-minimal "hello world" landing page by creating a new file named `index.page.tmpl` with following contents in a new `custom-templates/home` subdirectory in the directory from which you will launch device-portal:
 ```html
 {{template "shared/base.layout.tmpl" .}}
 
