@@ -1,5 +1,5 @@
-// Package deviceportal provides the ImSwitch OS device-portal server.
-package deviceportal
+// Package server provides the ImSwitch OS device-portal server.
+package server
 
 import (
 	"context"
@@ -17,11 +17,11 @@ import (
 	"github.com/unrolled/secure/cspbuilder"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/openUC2/device-portal/internal/app/deviceportal/client"
-	"github.com/openUC2/device-portal/internal/app/deviceportal/conf"
-	"github.com/openUC2/device-portal/internal/app/deviceportal/routes"
-	"github.com/openUC2/device-portal/internal/app/deviceportal/routes/assets"
-	"github.com/openUC2/device-portal/internal/app/deviceportal/tmplfunc"
+	"github.com/openUC2/device-portal/internal/app/server/client"
+	"github.com/openUC2/device-portal/internal/app/server/conf"
+	"github.com/openUC2/device-portal/internal/app/server/routes"
+	"github.com/openUC2/device-portal/internal/app/server/routes/assets"
+	"github.com/openUC2/device-portal/internal/app/server/tmplfunc"
 	"github.com/openUC2/device-portal/web"
 )
 
@@ -33,7 +33,7 @@ type Server struct {
 	Handlers *routes.Handlers
 }
 
-func NewServer(config conf.Config, logger godest.Logger) (s *Server, err error) {
+func New(config conf.Config, logger godest.Logger) (s *Server, err error) {
 	s = &Server{}
 	if s.Globals, err = client.NewGlobals(config, logger); err != nil {
 		return nil, errors.Wrap(err, "couldn't make app globals")
@@ -41,7 +41,7 @@ func NewServer(config conf.Config, logger godest.Logger) (s *Server, err error) 
 
 	s.Embeds = web.NewEmbeds()
 	templatesOverlay := &OverlayFS{
-		Upper: s.Globals.Templates.GetFS(),
+		Upper: s.Globals.Base.Templates.GetFS(),
 		Lower: s.Embeds.TemplatesFS,
 	}
 	s.Embeds.TemplatesFS = templatesOverlay
@@ -61,9 +61,24 @@ func NewServer(config conf.Config, logger godest.Logger) (s *Server, err error) 
 // Echo
 
 func (s *Server) configureLogging(e *echo.Echo) {
-	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
-		Format: "${remote_ip} ${method} ${uri} (${bytes_in}b) => " +
-			"(${bytes_out}b after ${latency_human}) ${status} ${error}\n",
+	e.Use(middleware.RequestLoggerWithConfig(middleware.RequestLoggerConfig{
+		LogValuesFunc: func(c echo.Context, v middleware.RequestLoggerValues) error {
+			err := ""
+			if v.Error != nil {
+				err = v.Error.Error()
+			}
+			fmt.Printf("%s %s %s => (%d after %s) %d %s\n",
+				v.Method, v.URI, v.RemoteIP, v.ResponseSize, v.Latency, v.Status, err,
+			)
+			return nil
+		},
+		LogLatency:      true,
+		LogRemoteIP:     true,
+		LogMethod:       true,
+		LogURI:          true,
+		LogStatus:       true,
+		LogError:        true,
+		LogResponseSize: true,
 	}))
 	e.HideBanner = true
 	e.HidePort = true
@@ -161,8 +176,6 @@ func (s *Server) Register(e *echo.Echo) error {
 
 // Running
 
-const port = 3000 // TODO: configure this with env var
-
 func (s *Server) Run(e *echo.Echo) error {
 	s.Globals.Base.Logger.Info("starting device-portal server")
 
@@ -172,7 +185,7 @@ func (s *Server) Run(e *echo.Echo) error {
 	// by calling the Close method.
 	eg, _ := errgroup.WithContext(context.Background())
 	eg.Go(func() error {
-		address := fmt.Sprintf(":%d", port)
+		address := fmt.Sprintf(":%d", s.Globals.Config.HTTP.Port)
 		s.Globals.Base.Logger.Infof("starting http server on %s", address)
 		return e.Start(address)
 	})

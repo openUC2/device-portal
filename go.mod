@@ -5,12 +5,14 @@ go 1.26
 require (
 	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/benbjohnson/hashfs v0.2.2
+	github.com/carlmjohnson/versioninfo v0.22.5
 	github.com/dgraph-io/ristretto v0.2.0
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/labstack/gommon v0.4.2
 	github.com/pkg/errors v0.9.1
 	github.com/sargassum-world/godest v0.6.0
 	github.com/unrolled/secure v1.17.0
+	github.com/urfave/cli/v3 v3.7.0
 	golang.org/x/sync v0.17.0
 )
 
@@ -134,7 +136,6 @@ require (
 	github.com/caarlos0/go-shellwords v1.0.12 // indirect
 	github.com/caarlos0/go-version v0.2.2 // indirect
 	github.com/caarlos0/log v0.5.1 // indirect
-	github.com/carlmjohnson/versioninfo v0.22.5 // indirect
 	github.com/catenacyber/perfsprint v0.9.1 // indirect
 	github.com/cavaliergopher/cpio v1.0.1 // indirect
 	github.com/ccojocar/zxcvbn-go v1.0.4 // indirect

@@ -3,7 +3,7 @@ A web browser landing page for easy user access to deployed apps
 
 ## Introduction
 
-Users connect to [ImSwitch OS](https://github.com/openuc2/imswitch-os) (which runs on a Raspberry Pi
+Users connect to [openUC2 OS](https://github.com/openUC2/os-RPi) (which runs on a Raspberry Pi
 computer) from a web browser on a client device by opening a URL like <http://home.uc2>.
 This tool provides a web page with a list of links to the various network services running on the OS
 (e.g. the ImSwitch GUI, the Cockpit system administration panel, or the system file manager) for
@@ -20,19 +20,19 @@ executable file. You should visit this repository's
 file for your platform and CPU architecture; for example, on a Raspberry Pi 5, you should download
 the archive named `device-portal_{version number}_linux_arm.tar.gz` (where the version number should
 be substituted). You can extract the device-portal binary from the archive using a command like:
-```
+```bash
 tar -xzf device-portal_{version number}_{os}_{cpu architecture}.tar.gz device-portal
 ```
 
 Then you may need to move the device-portal binary into a directory in your system path, or you can just run the device-portal binary in your current directory (in which case you should replace `device-portal` with `./device-portal` in the commands listed below).
 
 Once you have device-portal, you can run it as follows on a Raspberry Pi:
-```
+```bash
 ./device-portal
 ```
 
 Then you can view the landing page at <http://localhost:3000> . Note that if you are running it on a
-computer other than the Raspberry Pi with ImSwitch OS, then you will need to set some environment
+computer other than the Raspberry Pi with openUC2 OS, then you will need to set some environment
 variables (see below) to non-default values.
 
 ### Development
@@ -51,12 +51,12 @@ To execute the full build pipeline, run `make`; to build the docker images, run 
 
 #### Machine Name
 
-If you are running device-portal on a computer which is not a Raspberry Pi with the standard ImSwitch OS, then you'll need to set some environment variables. Specifically, you'll need to set:
+If you are running device-portal on a computer which is not a Raspberry Pi with the standard openUC2 OS, then you'll need to set some environment variables. Specifically, you'll need to set:
 
 - Either `MACHINENAME_NAME`, which should be a string representing the name of the machine to be displayed on the landing page, or `MACHINENAME_NAMEFILE`, which should be the path to a file containing the name of the machine to be displayed on the landing page.
 
 For example, you could run device-portal with the machine name `metal-slope-23501` with one of the following commands:
-```
+```bash
 # If you downloaded a device-portal binary:
 MACHINENAME_NAME=metal-slope-23501 ./device-portal
 # If you are developing the project:
@@ -66,7 +66,7 @@ MACHINENAME_NAME=metal-slope-23501 make run
 #### Custom Templates
 
 You can override the default webpage templates embedded in the device-portal binary by providing a path to the templates directory with the `TEMPLATES_PATH` variable, relative to the current working directory in which you start the device-portal program. For example, you could provide a more-minimal "hello world" landing page by creating a new file named `home.page.tmpl` with following contents in a new `custom-templates/home` subdirectory in the directory from which you will launch device-portal:
-```
+```html
 {{template "shared/base.layout.tmpl" .}}
 
 {{define "title" -}}
@@ -89,7 +89,7 @@ You can override the default webpage templates embedded in the device-portal bin
 ```
 
 and then running the following command:
-```
+```bash
 # If you downloaded a device-portal binary:
 TEMPLATES_PATH=custom-templates MACHINENAME_NAME=template-test ./device-portal
 # If you are developing the project:
