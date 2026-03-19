@@ -50,7 +50,7 @@ func getHomeViewData(host, machineName string) (vd HomeViewData, err error) {
 }
 
 func (h *Handlers) HandleHomeGet() echo.HandlerFunc {
-	t := "home/home.page.tmpl"
+	t := "home/index.page.tmpl"
 	h.r.MustHave(t)
 	return func(c echo.Context) error {
 		// Run queries
